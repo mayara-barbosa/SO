@@ -1,9 +1,10 @@
-#include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <windows.h>
 
-int main()
-{
-    int numProc,tempoExec[20],tempoEspera[20],tempoTurnaround[20],prioridade[20],mediaTempoEspera=0,mediaTempoTurnaround=0,i,j;
+int main(){
+    int numProc,tempoExec[20],tempoEspera[20],tempoVida[20],prioridade[20],mediaTempoEspera=0,mediaTempoVida=0,i,j;
     printf("Quantidade de processos(max 20):");
     scanf("%d",&numProc);
 
@@ -29,24 +30,24 @@ int main()
             tempoEspera[i]+=tempoExec[j];
     }
 
-    printf("\nProcesso\tTempo Execucao\tTempo Espera\tTurnaround");
+    printf("\nProcesso\tTempo Execucao\tTempo Espera\tTempo de Vida");
 
-    //calculando tempo de turnaround
+    //calculando tempo de Vida
     for(i=0;i<numProc;i++)
     {
 
-        tempoTurnaround[i]=tempoExec[i]+tempoEspera[i];
+        tempoVida[i]=tempoExec[i]+tempoEspera[i];
         mediaTempoEspera+=tempoEspera[i];
-        mediaTempoTurnaround+=tempoTurnaround[i];
+        mediaTempoVida+=tempoVida[i];
 
-        printf("\nP[%d]\t\t%d\t\t%d\t\t%d",i+1,tempoExec[i],tempoEspera[i],tempoTurnaround[i]);
-        sleep(tempoExec[i]);
+        printf("\nP[%d]\t\t%d\t\t%d\t\t%d",i+1,tempoExec[i],tempoEspera[i],tempoVida[i]);
+        //sleep(tempoExec[i]);
     }
 
     mediaTempoEspera/=i;
-    mediaTempoTurnaround/=i;
+    mediaTempoVida/=i;
     printf("\n\nMedia de tempo de espera:%d",mediaTempoEspera);
-    printf("\nMedia turnaround:%d",mediaTempoTurnaround);
+    printf("\nMedia Tempo de vida:%d",mediaTempoVida);
 
     return 0;
 }
