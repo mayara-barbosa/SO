@@ -1,6 +1,11 @@
 #include <unistd.h>
 #include <stdio.h>
 
+/*Ao contrário do round robin, neste algoritmo fatores externos são considerados para a escolha do próximo processo a ganhar o processador.
+A idéia básica é muito simples: a cada processo é associada uma prioridade, e o processo pronto com maior prioridade será aquele que vai rodar primeiro.
+Para evitar que processos com alta prioridade monopolizem o processador, 
+o escalonador decrementa a prioridade do processo que está rodando, a cada interrupção de tempo. Se tal ação fizer com que a prioridade do processo corrente torne-se mais baixa que a do de mais alta prioridade da fila de prontos, deve ocorrer uma troca de contexto.*/
+
 int main()
 {
     int numProc,tempoExec[20],tempoEspera[20],tempoTurnaround[20],prioridade[20],mediaTempoEspera=0,mediaTempoTurnaround=0,i,j;
